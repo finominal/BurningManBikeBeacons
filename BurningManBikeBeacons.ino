@@ -53,7 +53,7 @@ void setup()
   FastLED.addLeds<WS2812B, DATAPIN, GRB>(leds, LEDCOUNT);
  
   movement = random(0,20)/0.7; //randomize start pattern
-  //GetProgram();
+  GetProgram();
   //InitializeBalls();
  
 }
