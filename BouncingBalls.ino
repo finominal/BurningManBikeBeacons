@@ -1,5 +1,5 @@
 
-int BALLTOP = LEDCOUNT -1;
+int BALLTOP = LEDCOUNT ;
 
 //objects
 struct ball {

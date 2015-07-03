@@ -1,5 +1,8 @@
+#include <Flash.h>
+
 #include "FastLED.h"
 #include <EEPROM.h>
+ #include <avr/pgmspace.h>
  
  
 #define DATAPIN 1
@@ -12,10 +15,11 @@ const int LEDCOUNT = 51;
 CRGB leds[LEDCOUNT];
  
 byte eepromAddress = 0;
-int program = 0;
+int program = 8;
+int numberOfPrograms = 9;
  
 //Colors
-volatile uint16_t brightness = 255;
+volatile uint16_t brightness = 100;
  
  
  
@@ -36,6 +40,7 @@ volatile uint32_t black = Color(0,0,0);
 volatile uint32_t pink = Color(brightness,brightness/8,brightness/2);
 volatile uint32_t aqua = Color(0,brightness/2,brightness/2);
 volatile uint32_t yellow = Color(brightness/2,brightness/2,0);
+
 
  
  
@@ -90,6 +95,10 @@ switch(program)
   pl("RedBlue");
     RedBlue();
     break;
+  case 8:
+    pl("Fire");
+    Fire();
+    break;
 }
  FastLED.show();
 }
@@ -100,7 +109,7 @@ void GetProgram()
   byte storedProg = EEPROM.read(eepromAddress);
   Serial.print("Program Found: "); Serial.println(storedProg);
   
-  if(storedProg >= 7)
+  if(storedProg >= numberOfPrograms)
   {
     EEPROM.write(eepromAddress, 0);
   }
