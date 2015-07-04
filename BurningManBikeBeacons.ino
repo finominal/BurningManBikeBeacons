@@ -15,7 +15,7 @@ const int LEDCOUNT = 51;
 CRGB leds[LEDCOUNT];
  
 byte eepromAddress = 0;
-int program = 8;
+int program = 8; //zero based
 int numberOfPrograms = 9;
  
 //Colors
@@ -60,7 +60,8 @@ void setup()
  
 void loop()
 {
- 
+ serialEvent();
+
 switch(program)
 {
    case 0:
@@ -89,11 +90,11 @@ switch(program)
     break;
   case 6:
   pl("RedMorphing");
-    RedMorphing();
+    RedBlue();
     break;
   case 7:
   pl("RedBlue");
-    RedBlue();
+    Pink();
     break;
   case 8:
     pl("Fire");
@@ -109,7 +110,7 @@ void GetProgram()
   byte storedProg = EEPROM.read(eepromAddress);
   Serial.print("Program Found: "); Serial.println(storedProg);
   
-  if(storedProg >= numberOfPrograms)
+  if(storedProg >= numberOfPrograms-1)
   {
     EEPROM.write(eepromAddress, 0);
   }

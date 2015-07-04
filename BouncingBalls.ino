@@ -35,10 +35,11 @@ void BouncingBalls()
   InitializeBalls();
   pl("BouncingBalls");
  
-  while(true) //repeat until power off
+  while(program == 0) //repeat until power off
   {
-    PrintBallValues();
- 
+   // PrintBallValues();
+   CheckForSerialProgram();
+   
     for(int i = 0; i<3; i++)//for each ball
     {
       if(balls[i].bouncing)
@@ -107,7 +108,7 @@ void BouncingBalls()
            {
              balls[i].pos = BALLTOP-1; //in case we go one over
              balls[i].bouncing = true;
-             balls[i].waiting = (20, 400);//how long (frames) to wait at the top of the stick for
+             balls[i].waiting = (20, 800);//how long (frames) to wait at the top of the stick for
              balls[i].friction = random(90, 98);
              balls[i].friction /= -100; //random returns positive int, we require negative float
              //Serial.print(i);Serial.print("f="); Serial.println(balls[i].friction);
@@ -129,6 +130,7 @@ void BouncingBalls()
     //after pushing colors to the strip, clear all the balls from the strip ready to draw the next frame
     
     for(int i = 0; i<3; i++) leds[balls[i].pos] = 0;
+     
      
      
   }//while(true)
@@ -165,7 +167,7 @@ void InitializeBalls()
   balls[1] = two;
   balls[2] = three;
  
-  PrintBallValues();
+  //PrintBallValues();
   //  delay(50);
  
 }

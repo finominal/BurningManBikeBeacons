@@ -71,6 +71,7 @@ void RedGreen()
  
   }
   movement+=movementFactor;
+  CheckForSerialProgram();
 }
  
  
@@ -87,6 +88,7 @@ void RedBlue()
     leds[i].g=0;
   }
   movement+=movementFactor;
+  CheckForSerialProgram();
 }
  
 void BlueGreen()
@@ -105,6 +107,7 @@ void BlueGreen()
     
    }
    movement+=movementFactor;
+   CheckForSerialProgram();
 }
  
 void RedMorphing()
@@ -121,8 +124,25 @@ void RedMorphing()
       leds[i].b = leds[i].r*abs(sin(movement/2));
    }
    movement+=movementFactor;
+   CheckForSerialProgram();
 }
+
+ void Pink()
+{
+  for(int i = 0; i<LEDCOUNT; i++)
+  {
+    shade = //SinVerticle(i,0,size)
+            + SinRotating(i,0,size)
+            + SinCircle(i,0, size)
+            ;
  
+      leds[i] = CHSV(mapLed(shade), 255, brightness);
+      leds[i].g = leds[i].r/8;
+      leds[i].b = leds[i].r/2;
+   }
+   movement+=movementFactor;
+   CheckForSerialProgram();
+}
  
 void AquaCentred()
 {
@@ -185,6 +205,11 @@ uint32_t Color(byte r, byte g, byte b)
   c |= b;
   return c;
 }
+
+void CheckForSerialProgram()
+{
+serialEvent();
+}
  
 void serialEvent() {
   while (Serial.available()) {
@@ -193,7 +218,7 @@ void serialEvent() {
     Serial.print("DataRecieved: "); Serial.println(inByte);
     inByte -= 48;
     Serial.print("DataModified: "); Serial.println(inByte);
-     if(inByte <=6)
+     if(inByte <numberOfPrograms)
      {
        program = inByte;
        Serial.print("Program Set as "); Serial.println(inByte);
