@@ -108,7 +108,7 @@ void BouncingBalls()
            {
              balls[i].pos = BALLTOP-1; //in case we go one over
              balls[i].bouncing = true;
-             balls[i].waiting = (20, 800);//how long (frames) to wait at the top of the stick for
+             balls[i].waiting = (20, 600);//how long (frames) to wait at the top of the stick for
              balls[i].friction = random(90, 98);
              balls[i].friction /= -100; //random returns positive int, we require negative float
              //Serial.print(i);Serial.print("f="); Serial.println(balls[i].friction);
