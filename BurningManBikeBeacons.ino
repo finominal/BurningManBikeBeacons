@@ -11,7 +11,7 @@
  
  
 //control
-const int LEDCOUNT = 51;
+const int LEDCOUNT = 12;//51;
 CRGB leds[LEDCOUNT];
  
 byte eepromAddress = 0;
@@ -50,11 +50,12 @@ void setup()
   Serial.begin(115200);
   Serial.println("*** RESET ***");
  
-  FastLED.addLeds<WS2812B, DATAPIN, GRB>(leds, LEDCOUNT);
+  //FastLED.addLeds<WS2812B, DATAPIN, GRB>(leds, LEDCOUNT);
+  FastLED.addLeds<WS2801,2, 3, RGB>(leds, LEDCOUNT);
  
   movement = random(0,20)/0.7; //randomize start pattern
   GetProgram();
-  //InitializeBalls();
+  InitializeBalls();
  
 }
  
