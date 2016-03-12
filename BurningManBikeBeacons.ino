@@ -11,15 +11,15 @@
  
  
 //control
-const int LEDCOUNT = 51;
+const int LEDCOUNT = 48;
 CRGB leds[LEDCOUNT];
  
 byte eepromAddress = 0;
-int program = 8; //zero based
-int numberOfPrograms = 9;
+int program = 0; //zero based
+int numberOfPrograms = 7;
  
 //Colors
-volatile uint16_t brightness = 100;
+volatile uint16_t brightness = 254;
  
  
  
@@ -66,8 +66,8 @@ void loop()
 switch(program)
 {
    case 0:
-    pl("BouncingBalls");
-    BouncingBalls();
+    pl("Fire");
+        Fire();
     break;
   case 1:
   pl("RainbowMorphing");
@@ -98,8 +98,8 @@ switch(program)
     Pink();
     break;
   case 8:
-    pl("Fire");
-    Fire();
+    pl("BouncingBalls");
+    BouncingBalls();
     break;
 }
  FastLED.show();
